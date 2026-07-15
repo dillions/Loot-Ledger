@@ -1,4 +1,4 @@
-import { searchDeals, getStores } from "@/lib/cheapshark";
+import { searchDeals, getStores } from "@/lib/itad";
 import DealsBrowser from "@/components/DealsBrowser";
 
 export const metadata = { title: "Deal Tracker — Loot Ledger" };
@@ -27,7 +27,7 @@ export default async function DealsPage() {
       <p className="ll-muted ll-page-subtitle">Cheapest verified price across every major store, right now.</p>
       {loadError && (
         <p className="ll-muted">
-          Live prices are temporarily unavailable — CheapShark may be down or rate-limiting. Try again shortly.
+          Live prices are temporarily unavailable — try again shortly.
         </p>
       )}
       <DealsBrowser initialDeals={deals} storeNames={storeNames} />

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Search, Heart } from "lucide-react";
-import type { Deal } from "@/lib/cheapshark";
+import type { Deal } from "@/lib/itad";
 import PriceTag from "./PriceTag";
 
 export default function DealsBrowser({

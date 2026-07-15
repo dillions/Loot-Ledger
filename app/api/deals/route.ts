@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { searchDeals } from "@/lib/cheapshark";
+import { searchDeals } from "@/lib/itad";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
     });
     return NextResponse.json({ deals });
   } catch (err) {
-    console.error("Failed to fetch CheapShark deals:", err);
+    console.error("Failed to fetch ITAD deals:", err);
     return NextResponse.json({ error: "Failed to fetch deals right now." }, { status: 502 });
   }
 }

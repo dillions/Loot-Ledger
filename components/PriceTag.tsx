@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import type { Deal } from "@/lib/cheapshark";
-import { formatSavings } from "@/lib/cheapshark";
+import type { Deal } from "@/lib/itad";
+import { formatSavings } from "@/lib/itad";
+import { buildOutboundUrl } from "@/lib/affiliates";
 
 export default function PriceTag({ deal, storeName }: { deal: Deal; storeName?: string }) {
   const [hover, setHover] = useState(false);
@@ -10,7 +11,10 @@ export default function PriceTag({ deal, storeName }: { deal: Deal; storeName?: 
   const savingsPct = formatSavings(deal.savings);
 
   return (
-    <div
+    <a
+      href={buildOutboundUrl(deal)}
+      target="_blank"
+      rel="noopener noreferrer sponsored"
       className="ll-tag-wrap"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -25,6 +29,6 @@ export default function PriceTag({ deal, storeName }: { deal: Deal; storeName?: 
         {savingsPct > 0 && <span className="ll-mono ll-tag-discount">-{savingsPct}%</span>}
         {storeName && <span className="ll-tag-store">{storeName}</span>}
       </div>
-    </div>
+    </a>
   );
 }

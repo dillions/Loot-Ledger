@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { TrendingDown, Flame, BookOpen } from "lucide-react";
-import { searchDeals, getStores } from "@/lib/cheapshark";
+import { searchDeals, getStores } from "@/lib/itad";
 import PriceTag from "@/components/PriceTag";
 
 export const revalidate = 3600; // refresh featured deals hourly
@@ -17,7 +17,7 @@ export default async function HomePage() {
     featuredDeals = deals;
     storeNames = Object.fromEntries(stores.map((s) => [s.storeID, s.storeName]));
   } catch (err) {
-    // CheapShark can occasionally be slow/unavailable — the page should still render.
+    // ITAD can occasionally be slow/unavailable — the page should still render.
     console.error("Failed to load featured deals:", err);
   }
 
@@ -54,7 +54,7 @@ export default async function HomePage() {
             </div>
           ))}
           {featuredDeals.length === 0 && (
-            <p className="ll-muted">Live deals will show here once CheapShark responds.</p>
+            <p className="ll-muted">Live deals will show here shortly.</p>
           )}
         </div>
       </section>

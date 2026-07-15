@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="ll-main">{children}</main>
         <footer className="ll-footer">
           <span className="ll-mono">Loot Ledger</span>
-          <span>Price data refreshed hourly via CheapShark</span>
+          <span>Price data refreshed hourly via IsThereAnyDeal</span>
         </footer>
       </body>
     </html>
