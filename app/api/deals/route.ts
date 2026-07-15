@@ -15,6 +15,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ deals });
   } catch (err) {
     console.error("Failed to fetch ITAD deals:", err);
-    return NextResponse.json({ error: "Failed to fetch deals right now." }, { status: 502 });
+    // TEMPORARY diagnostic detail — revert once the browse-deals 502 is root-caused.
+    return NextResponse.json(
+      { error: "Failed to fetch deals right now.", debug: err instanceof Error ? err.message : String(err) },
+      { status: 502 }
+    );
   }
 }
