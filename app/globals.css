@@ -1,0 +1,487 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;700;800&family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --ink: #14213d;
+  --paper: #fbf6ec;
+  --paper-line: #e7dec7;
+  --highlighter: #f2a93b;
+  --forest: #2d5d4f;
+  --crimson: #c1443a;
+  --ink-text: #1b1b1f;
+}
+
+body {
+  background: var(--ink);
+  background-image: radial-gradient(circle at 15% 10%, rgba(242, 169, 59, 0.07), transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(45, 93, 79, 0.15), transparent 40%);
+  color: var(--paper);
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
+}
+
+.ll-display {
+  font-family: "Roboto Slab", serif;
+}
+.ll-mono {
+  font-family: "JetBrains Mono", monospace;
+}
+.ll-muted {
+  opacity: 0.65;
+  font-size: 0.875rem;
+}
+.ll-highlighter {
+  background: linear-gradient(180deg, transparent 60%, rgba(242, 169, 59, 0.55) 60%);
+  padding: 0 2px;
+}
+.ll-sticky-tab {
+  font-family: "Roboto Slab", serif;
+  font-weight: 700;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--forest);
+  color: var(--paper);
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* Header / nav */
+.ll-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(20, 33, 61, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.ll-header-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ll-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--paper);
+}
+.ll-brand-text {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+.ll-nav-desktop {
+  display: none;
+  gap: 0.75rem;
+}
+.ll-nav-toggle {
+  display: block;
+  background: none;
+  border: none;
+  color: var(--paper);
+  cursor: pointer;
+}
+.ll-nav-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 1.25rem 1rem;
+}
+@media (min-width: 768px) {
+  .ll-nav-desktop {
+    display: flex;
+  }
+  .ll-nav-toggle {
+    display: none;
+  }
+}
+
+.ll-nav-btn {
+  font-family: "Roboto Slab", serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 3px 3px 8px 8px;
+  background: var(--paper);
+  color: var(--ink-text);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+  transform: rotate(-1deg);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+.ll-nav-btn:nth-child(even) {
+  transform: rotate(1deg);
+}
+.ll-nav-btn:hover {
+  transform: rotate(0deg) translateY(-2px);
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.25);
+}
+.ll-nav-btn.active {
+  background: var(--highlighter);
+}
+
+/* Cards */
+.ll-card {
+  background: var(--paper);
+  color: var(--ink-text);
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  position: relative;
+  padding: 1.25rem;
+  padding-top: 1.75rem;
+}
+.ll-card::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: -6px;
+  width: 34px;
+  height: 12px;
+  background: rgba(242, 169, 59, 0.85);
+  transform: rotate(-3deg);
+}
+.ll-paper-ruled {
+  background: var(--paper);
+  background-image: repeating-linear-gradient(var(--paper), var(--paper) 27px, var(--paper-line) 28px);
+}
+
+/* Price tags */
+.ll-tag-wrap {
+  transition: transform 0.2s ease;
+}
+.ll-tag {
+  position: relative;
+  background: var(--highlighter);
+  color: var(--ink-text);
+  clip-path: polygon(0 0, 80% 0, 100% 50%, 80% 100%, 0 100%);
+  padding: 0.9rem 1.6rem;
+  min-width: 128px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.ll-tag-hole {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.ll-tag-price {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-left: 10px;
+}
+.ll-tag-list {
+  font-size: 0.75rem;
+  text-decoration: line-through;
+  opacity: 0.6;
+  margin-left: 10px;
+}
+.ll-tag-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.4rem;
+  flex-wrap: wrap;
+}
+.ll-tag-discount {
+  background: var(--crimson);
+  color: var(--paper);
+  font-size: 0.7rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 2px;
+}
+.ll-tag-store {
+  font-size: 0.72rem;
+  opacity: 0.85;
+}
+
+/* Deal tracker */
+.ll-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  max-width: 24rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 0.5rem;
+}
+.ll-search-icon {
+  opacity: 0.6;
+}
+.ll-search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  flex: 1;
+  color: var(--paper);
+  font-size: 0.9rem;
+}
+.ll-deals-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.ll-deal-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.ll-deal-title {
+  font-weight: 700;
+}
+.ll-wishlist-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  opacity: 0.7;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 0.5rem;
+}
+.ll-wishlist-btn:hover {
+  opacity: 1;
+}
+
+/* Pricing tiers */
+.ll-tier {
+  border: 2px solid transparent;
+}
+.ll-tier.highlight {
+  border-color: var(--highlighter);
+  transform: translateY(-6px);
+}
+.ll-tier-btn {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.65rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+}
+
+/* Layout */
+.ll-main {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem;
+}
+.ll-footer {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  margin-top: 2.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+/* Home page */
+.ll-hero {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+  padding: 2rem 0;
+}
+.ll-hero-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-top: 1rem;
+}
+.ll-hero-copy {
+  margin-top: 1.25rem;
+  opacity: 0.8;
+  max-width: 28rem;
+}
+.ll-hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+.ll-btn-primary,
+.ll-btn-secondary {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  text-decoration: none;
+  display: inline-block;
+}
+.ll-btn-primary {
+  background: var(--highlighter);
+  color: var(--ink-text);
+}
+.ll-btn-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--paper);
+}
+.ll-hero-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+.ll-hero-tag-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.ll-hero-tag-label {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+.ll-features {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  padding: 2.5rem 0;
+}
+.ll-feature-icon {
+  margin-bottom: 0.5rem;
+}
+.ll-feature-title {
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+.ll-feature-copy {
+  font-size: 0.875rem;
+  margin-top: 0.4rem;
+  opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+  .ll-hero {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Shared page header */
+.ll-page-title {
+  font-size: 1.875rem;
+  font-weight: 800;
+}
+.ll-page-subtitle {
+  margin-bottom: 1.5rem;
+}
+
+/* Tips page */
+.ll-tips-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.ll-tip-title {
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-top: 0.75rem;
+}
+.ll-tip-game {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-top: 0.5rem;
+}
+
+/* Walkthroughs page */
+.ll-walkthrough-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.ll-walkthrough-item {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.ll-walkthrough-index {
+  font-size: 1.875rem;
+  font-weight: 800;
+  opacity: 0.2;
+}
+.ll-walkthrough-body {
+  flex: 1;
+}
+.ll-walkthrough-game {
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+.ll-walkthrough-chapter {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+.ll-walkthrough-steps {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+/* Pricing page */
+.ll-tiers-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.ll-tier-badge {
+  position: absolute;
+  top: -0.75rem;
+  left: 1.5rem;
+}
+.ll-tier-name {
+  font-weight: 800;
+  font-size: 1.25rem;
+  margin-top: 0.5rem;
+}
+.ll-tier-tagline {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-bottom: 0.75rem;
+}
+.ll-tier-price {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.ll-tier-period {
+  font-size: 0.875rem;
+  font-weight: 400;
+  opacity: 0.6;
+}
+.ll-tier-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.ll-tier-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+.ll-tier-check {
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
