@@ -42,11 +42,13 @@ const SORT_MAP: Record<NonNullable<DealSearchParams["sortBy"]>, string> = {
   Recent: "-time",
 };
 
-function itadHeaders(): HeadersInit {
+function itadHeaders(withJsonBody = false): HeadersInit {
   if (!apiKey) {
     throw new Error("ITAD_API_KEY is not set");
   }
-  return { "ITAD-API-Key": apiKey, "Content-Type": "application/json" };
+  return withJsonBody
+    ? { "ITAD-API-Key": apiKey, "Content-Type": "application/json" }
+    : { "ITAD-API-Key": apiKey };
 }
 
 type ItadShop = { id: number; name: string };
@@ -104,7 +106,7 @@ async function browseDeals(params: DealSearchParams): Promise<Deal[]> {
 
   const res = await fetch(`${ITAD_BASE}/deals/v2?${search.toString()}`, {
     method: "GET",
-    headers: itadHeaders(),
+    headers: itadHeaders(false),
     next: { revalidate: 3600 },
   });
   if (!res.ok) {
@@ -124,7 +126,7 @@ async function browseDeals(params: DealSearchParams): Promise<Deal[]> {
 async function searchByTitle(params: DealSearchParams): Promise<Deal[]> {
   const searchRes = await fetch(
     `${ITAD_BASE}/games/search/v1?title=${encodeURIComponent(params.title!)}&results=10`,
-    { headers: itadHeaders(), next: { revalidate: 3600 } }
+    { headers: itadHeaders(false), next: { revalidate: 3600 } }
   );
   if (!searchRes.ok) {
     throw new Error(`ITAD /games/search/v1 request failed: ${searchRes.status}`);
@@ -137,7 +139,7 @@ async function searchByTitle(params: DealSearchParams): Promise<Deal[]> {
 
   const pricesRes = await fetch(`${ITAD_BASE}/games/prices/v3?${pricesSearch.toString()}`, {
     method: "POST",
-    headers: itadHeaders(),
+    headers: itadHeaders(true),
     body: JSON.stringify(games.map((g) => g.id)),
     next: { revalidate: 3600 },
   });
