@@ -134,7 +134,9 @@ async function searchByTitle(params: DealSearchParams): Promise<Deal[]> {
   const games: { id: string; title: string }[] = await searchRes.json();
   if (games.length === 0) return [];
 
-  const pricesSearch = new URLSearchParams({ country: "US", deals: "true" });
+  // No `deals: "true"` filter here — search needs to surface every matched game
+  // (even at full price) so it can be added to a wishlist, not just discounted ones.
+  const pricesSearch = new URLSearchParams({ country: "US" });
   if (params.storeID) pricesSearch.set("shops", params.storeID);
 
   const pricesRes = await fetch(`${ITAD_BASE}/games/prices/v3?${pricesSearch.toString()}`, {
